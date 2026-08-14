@@ -4,7 +4,7 @@ from pathlib import Path
 from django.conf import settings
 from django.core.management.base import BaseCommand
 
-from core.models import AppSettings, Product, ProductSize, Store
+from core.models import AppSettings, Category, Product, ProductSize, Store
 
 
 ASSET_DIR = Path(__file__).resolve().parent / 'mock_images'
@@ -59,6 +59,11 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         Store.objects.update_or_create(code='main', defaults={'name': 'ZARA KIDS'})
         AppSettings.current()
+        for index, category_name in enumerate(['Куртки', 'Трикотаж', 'Брюки', 'Обувь'], start=1):
+            Category.objects.update_or_create(
+                name=category_name,
+                defaults={'sort_order': index * 10, 'is_active': True},
+            )
 
         media_dir = Path(settings.MEDIA_ROOT) / 'products'
         media_dir.mkdir(parents=True, exist_ok=True)

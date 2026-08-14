@@ -1,10 +1,11 @@
 from django.contrib import admin
+from django import forms
 from django.contrib.auth.admin import GroupAdmin as DjangoGroupAdmin
 from django.contrib.auth.admin import UserAdmin as DjangoUserAdmin
 from django.contrib.auth.models import Group, User
 from unfold.admin import ModelAdmin, TabularInline
 
-from .models import AppSettings, Product, ProductSize, Store, Transaction, TransactionItem
+from .models import AppSettings, Category, Product, ProductSize, Store, Transaction, TransactionItem
 
 
 admin.site.unregister(User)
@@ -32,9 +33,29 @@ class AppSettingsAdmin(ModelAdmin):
     list_display = ('id', 'updated_at')
 
 
+@admin.register(Category)
+class CategoryAdmin(ModelAdmin):
+    list_display = ('name', 'sort_order', 'is_active')
+    list_editable = ('sort_order', 'is_active')
+    search_fields = ('name',)
+
+
 class ProductSizeInline(TabularInline):
     model = ProductSize
     extra = 0
+
+
+class ProductAdminForm(forms.ModelForm):
+    category = forms.ChoiceField(label='Категория')
+
+    class Meta:
+        model = Product
+        fields = '__all__'
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        choices = [(category.name, category.name) for category in Category.objects.filter(is_active=True)]
+        self.fields['category'].choices = choices or Product.CATEGORY_CHOICES
 
 
 @admin.register(ProductSize)
@@ -46,6 +67,7 @@ class ProductSizeAdmin(ModelAdmin):
 
 @admin.register(Product)
 class ProductAdmin(ModelAdmin):
+    form = ProductAdminForm
     list_display = ('name', 'barcode', 'category', 'cost_price', 'retail_price', 'is_active')
     list_display_links = ('name',)
     list_filter = ('category', 'is_active')

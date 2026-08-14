@@ -91,6 +91,11 @@ UNFOLD = {
                         'link': reverse_lazy('admin:core_product_changelist'),
                     },
                     {
+                        'title': 'Категории',
+                        'icon': 'category',
+                        'link': reverse_lazy('admin:core_category_changelist'),
+                    },
+                    {
                         'title': 'Размеры и остатки',
                         'icon': 'straighten',
                         'link': reverse_lazy('admin:core_productsize_changelist'),

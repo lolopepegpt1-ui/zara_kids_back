@@ -12,7 +12,7 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from .models import Product, ProductSize, Store, Transaction, TransactionItem
+from .models import Category, Product, ProductSize, Store, Transaction, TransactionItem
 from .serializers import ProductSerializer, SettingsSerializer, TransactionSerializer
 
 
@@ -87,9 +87,12 @@ class MeView(APIView):
 
 class BootstrapView(APIView):
     def get(self, request):
+        categories = list(Category.objects.filter(is_active=True).values_list('name', flat=True))
+        if not categories:
+            categories = [choice[0] for choice in Product.CATEGORY_CHOICES]
         return Response({
             'settings': SettingsSerializer.build(),
-            'categories': [choice[0] for choice in Product.CATEGORY_CHOICES],
+            'categories': categories,
             'payment_methods': [
                 {'code': code, 'name': name}
                 for code, name in Transaction.PAYMENT_CHOICES

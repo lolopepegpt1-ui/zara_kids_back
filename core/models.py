@@ -31,6 +31,20 @@ class AppSettings(models.Model):
         return obj
 
 
+class Category(models.Model):
+    name = models.CharField('Название', max_length=32, unique=True)
+    is_active = models.BooleanField('Активна', default=True)
+    sort_order = models.PositiveIntegerField('Порядок', default=100)
+
+    class Meta:
+        verbose_name = 'Категория'
+        verbose_name_plural = 'Категории'
+        ordering = ['sort_order', 'name']
+
+    def __str__(self):
+        return self.name
+
+
 class Product(models.Model):
     CATEGORY_JACKETS = 'Куртки'
     CATEGORY_KNIT = 'Трикотаж'
@@ -46,7 +60,7 @@ class Product(models.Model):
 
     name = models.CharField('Название', max_length=180)
     barcode = models.CharField('Штрих-код', max_length=64, unique=True)
-    category = models.CharField('Категория', max_length=32, choices=CATEGORY_CHOICES)
+    category = models.CharField('Категория', max_length=32)
     cost_price = models.PositiveIntegerField('Закупочная цена', default=0)
     retail_price = models.PositiveIntegerField('Цена продажи', default=0)
     image = models.ImageField('Изображение', upload_to='products/', blank=True, null=True)

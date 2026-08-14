@@ -3,7 +3,7 @@ from datetime import UTC, datetime
 from django.core.management.base import BaseCommand
 from django.utils import timezone
 
-from core.models import AppSettings, Product, ProductSize, Store, Transaction, TransactionItem
+from core.models import AppSettings, Category, Product, ProductSize, Store, Transaction, TransactionItem
 
 
 PRODUCTS = [
@@ -75,6 +75,11 @@ class Command(BaseCommand):
         Store.objects.all().delete()
         Store.objects.update_or_create(code='main', defaults={'name': 'ZARA KIDS'})
         AppSettings.current()
+        for index, category_name in enumerate(['Куртки', 'Трикотаж', 'Брюки', 'Обувь'], start=1):
+            Category.objects.update_or_create(
+                name=category_name,
+                defaults={'sort_order': index * 10, 'is_active': True},
+            )
 
         product_map = {}
         for item in PRODUCTS:
