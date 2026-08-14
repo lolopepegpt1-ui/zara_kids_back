@@ -41,7 +41,7 @@ DEBUG = env_bool('DJANGO_DEBUG', True)
 
 ALLOWED_HOSTS = env_list(
     'DJANGO_ALLOWED_HOSTS',
-    'localhost,127.0.0.1,.railway.app,.up.railway.app',
+    'localhost,127.0.0.1,.fly.dev,.railway.app,.up.railway.app',
 )
 if railway_domain := os.environ.get('RAILWAY_PUBLIC_DOMAIN'):
     ALLOWED_HOSTS.append(railway_domain)
