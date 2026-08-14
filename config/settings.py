@@ -244,7 +244,7 @@ STORAGES = {
 
 CORS_ALLOWED_ORIGINS = env_list(
     'CORS_ALLOWED_ORIGINS',
-    'http://localhost:5173,http://127.0.0.1:5173',
+    'http://localhost:5173,http://127.0.0.1:5173,https://zara-kids-front.vercel.app',
 )
 CORS_ALLOWED_ORIGIN_REGEXES = env_list(
     'CORS_ALLOWED_ORIGIN_REGEXES',
@@ -253,7 +253,7 @@ CORS_ALLOWED_ORIGIN_REGEXES = env_list(
 CORS_ALLOW_CREDENTIALS = True
 CSRF_TRUSTED_ORIGINS = env_list(
     'CSRF_TRUSTED_ORIGINS',
-    'http://localhost:5173,http://127.0.0.1:5173,https://*.vercel.app',
+    'http://localhost:5173,http://127.0.0.1:5173,https://zara-kids-front.vercel.app,https://*.vercel.app',
 )
 SESSION_COOKIE_SAMESITE = os.environ.get('SESSION_COOKIE_SAMESITE', 'Lax' if DEBUG else 'None')
 CSRF_COOKIE_SAMESITE = os.environ.get('CSRF_COOKIE_SAMESITE', 'Lax' if DEBUG else 'None')

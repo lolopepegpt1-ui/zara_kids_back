@@ -26,7 +26,7 @@ Required variables:
 DJANGO_DEBUG=False
 DJANGO_SECRET_KEY=<long random secret>
 DJANGO_ALLOWED_HOSTS=.fly.dev,.railway.app,.up.railway.app
-CORS_ALLOWED_ORIGINS=https://your-frontend.vercel.app
-CSRF_TRUSTED_ORIGINS=https://your-frontend.vercel.app,https://*.vercel.app
+CORS_ALLOWED_ORIGINS=https://zara-kids-front.vercel.app
+CSRF_TRUSTED_ORIGINS=https://zara-kids-front.vercel.app,https://*.vercel.app
 DATABASE_URL=${{Postgres.DATABASE_URL}}
 ```
