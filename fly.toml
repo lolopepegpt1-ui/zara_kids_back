@@ -17,6 +17,13 @@ primary_region = 'arn'
   min_machines_running = 0
   processes = ['app']
 
+[env]
+  DATA_DIR = '/data'
+
+[[mounts]]
+  source = 'zara_kids_data'
+  destination = '/data'
+
 [[vm]]
   memory = '1gb'
   cpu_kind = 'shared'

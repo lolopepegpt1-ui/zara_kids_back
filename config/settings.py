@@ -20,6 +20,7 @@ from django.urls import reverse_lazy
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+DATA_DIR = Path(os.environ.get('DATA_DIR', BASE_DIR))
 
 
 def env_bool(name, default=False):
@@ -188,7 +189,7 @@ if 'DATABASE_URL' not in os.environ and os.environ.get('PGHOST'):
 
 DATABASES = {
     'default': dj_database_url.config(
-        default=f'sqlite:///{BASE_DIR / "db.sqlite3"}',
+        default=f'sqlite:///{DATA_DIR / "db.sqlite3"}',
         conn_max_age=600,
         conn_health_checks=True,
     )
@@ -232,7 +233,7 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 MEDIA_URL = '/media/'
-MEDIA_ROOT = BASE_DIR / 'media'
+MEDIA_ROOT = DATA_DIR / 'media'
 SERVE_MEDIA = env_bool('SERVE_MEDIA', True)
 STORAGES = {
     'default': {
