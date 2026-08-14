@@ -1,0 +1,21 @@
+#nav-sidebar-apps a {
+  border: 1px solid transparent;
+}
+
+#nav-sidebar-apps a .material-symbols-outlined {
+  color: #6b7280;
+}
+
+#nav-sidebar-apps a.active {
+  background: #f7dccc;
+  border-color: #e9c2b1;
+  color: #111827;
+}
+
+#nav-sidebar-apps a.active .material-symbols-outlined {
+  color: #111827;
+}
+
+#nav-sidebar-apps h2 {
+  color: #111827;
+}

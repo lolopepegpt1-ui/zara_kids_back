@@ -1,0 +1,9 @@
+Django==6.1
+djangorestframework==3.18.0
+django-cors-headers==4.9.0
+django-unfold
+dj-database-url==3.0.1
+gunicorn==23.0.0
+Pillow==12.3.0
+psycopg[binary]==3.3.2
+whitenoise==6.11.0
